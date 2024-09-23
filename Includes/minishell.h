@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgrellie <pgrellie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: acarpent <acarpent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 15:22:22 by pgrellie          #+#    #+#             */
-/*   Updated: 2024/09/23 13:05:20 by pgrellie         ###   ########.fr       */
+/*   Updated: 2024/09/23 15:07:35 by acarpent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,10 @@ typedef struct s_ms
 /************************/
 
 //MINISHELL
+
+// Builtin
+
+void    		print_env(t_env *env);
 
 // The program
 
