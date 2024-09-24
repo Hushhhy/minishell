@@ -6,7 +6,7 @@
 /*   By: acarpent <acarpent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 15:22:22 by pgrellie          #+#    #+#             */
-/*   Updated: 2024/09/23 15:07:35 by acarpent         ###   ########.fr       */
+/*   Updated: 2024/09/24 15:10:18 by acarpent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ typedef struct s_ms
 // Builtin
 
 void    		print_env(t_env *env);
+void			echo(t_token *tok);
 
 // The program
 

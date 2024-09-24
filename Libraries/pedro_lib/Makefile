@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pgrellie <pgrellie@student.42.fr>          +#+  +:+       +#+         #
+#    By: acarpent <acarpent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/14 12:20:45 by apintus           #+#    #+#              #
-#    Updated: 2024/09/20 18:17:05 by pgrellie         ###   ########.fr        #
+#    Updated: 2024/09/23 15:09:01 by acarpent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,6 @@ SRCS =	ft_isalpha.c\
 		ft_strjoin.c\
 		ft_strtrim.c\
 		ft_split.c\
-		ft_split_multi.c\
 		ft_itoa.c\
 		ft_strmapi.c\
 		ft_striteri.c\
