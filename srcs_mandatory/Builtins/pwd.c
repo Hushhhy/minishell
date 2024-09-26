@@ -6,7 +6,7 @@
 /*   By: acarpent <acarpent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 14:38:35 by acarpent          #+#    #+#             */
-/*   Updated: 2024/09/24 15:22:55 by acarpent         ###   ########.fr       */
+/*   Updated: 2024/09/26 13:03:15 by acarpent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*get_cwd(void)
 	return (cwd);
 }
 
-void	pwd(t_env *env)
+void	ft_pwd(t_env *env)
 {
     char *cwd;
 

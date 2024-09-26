@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: acarpent <acarpent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/25 11:23:52 by marvin            #+#    #+#             */
-/*   Updated: 2024/09/25 11:23:52 by marvin           ###   ########.fr       */
+/*   Created: 2024/09/26 15:12:57 by acarpent          #+#    #+#             */
+/*   Updated: 2024/09/26 15:12:57 by acarpent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "minishell.h"
 
 int	is_num(const char *str)
@@ -28,7 +27,7 @@ int	is_num(const char *str)
 	return (1);
 }
 
-void	exit(t_token *tok)
+void	ft_exit(t_token *tok)
 {
 	int exit_stat;
 

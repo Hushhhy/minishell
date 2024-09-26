@@ -1,39 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acarpent <acarpent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/23 15:33:38 by acarpent          #+#    #+#             */
-/*   Updated: 2024/09/26 13:03:29 by acarpent         ###   ########.fr       */
+/*   Created: 2024/09/26 15:34:42 by acarpent          #+#    #+#             */
+/*   Updated: 2024/09/26 16:38:09 by acarpent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_echo(t_token *tok)
+void    swap_list(t_env *a, t_env *b)
 {
-	int nl;
-	nl = 1;
-	if (tok->next)
+    t_env *tmp;
+
+    tmp = a;
+    a = b;
+    b = tmp;
+}
+
+int	no_args(t_env *env)
+{
+	int sorted;
+
+	if (env == NULL)
+		return ;
+	sorted = 0;
+	while (sorted == 0)
 	{
-		tok = tok->next;
-		if(tok && ft_strcmp(tok->next->value, "-n") == 0)
+		sorted = 1;
+		while (env != NULL && env->next != NULL)
 		{
-			nl = 0;
-			tok = tok->next;
+			if (ft_strcmp(env->name, env->next->name) > 0)
+            {
+				swap_list(env, env->next);
+                sorted = 0;
+            }
+            env = env->next;
 		}
-		while (tok)
-		{
-			printf("%s", tok->value);
-			if (tok->next)
-				printf(" ");
-			tok = tok->next;
-		}
-		if (nl)
-			printf("\n");
 	}
-	else
-		printf("\n");
 }

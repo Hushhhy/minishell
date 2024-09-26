@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: acarpent <acarpent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/25 11:23:31 by marvin            #+#    #+#             */
-/*   Updated: 2024/09/25 11:23:31 by marvin           ###   ########.fr       */
+/*   Created: 2024/09/26 15:12:43 by acarpent          #+#    #+#             */
+/*   Updated: 2024/09/26 15:12:43 by acarpent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	changedir(const char *path)
 	}
 }
 
-void	cd(t_token *tok)
+void	ft_cd(t_token *tok)
 {
 	if (tok)
 		changedir(getenv("HOME"));
