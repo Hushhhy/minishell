@@ -37,6 +37,33 @@ void	export_handle(t_env *env, t_token *tok)
 		new_var(env, tok, 0);
 }
 
+void	token_decompose(t_token *tok, t_env *env, char *name, char *value)
+{
+	int	i;
+	int	j;
+	int	equal;
+
+	i = 0;
+	j = i;
+	equal = 0;
+	while (tok->value[i] && tok->value[i] != '=')
+		i++;
+	if (tok->value[i] == '=' || tok->value[i] == '\0')
+	{
+		name = ft_substr(tok->value, j, i - j);
+		if (tok->value[i] == '=')
+			equal = 1;
+	}
+	if (tok->value[i] != '\0' && tok->value[i + 1] != '\0')
+	{
+		i++;
+		j = i;
+		while (tok->value[i])
+			i++;
+		value = ft_substr(tok->value, j, i - j);
+	}
+}
+
 void	ft_export(t_token *tok, t_env *env)
 {
 	t_env	*exist;
@@ -44,31 +71,18 @@ void	ft_export(t_token *tok, t_env *env)
 	char	*name;
 	char	*value;
 	t_env	*new;
-	int		i;
-	int		j;
 
-	i = 0;
-	j = 0;
 	value = NULL;
 	if (!tok->next)
 		print_export(env);
-	while (tok->value[i] && tok->value[i] != '=')
-		i++;
-	if (tok->value[i] == '=')
+	while (tok)
 	{
-		j = i;
-		name = ft_substr(tok->value, j, i);
-		i++;
+		token_decompose(tok, env, name, value);
+		exist = find_env(tok->value);
+		if (exist)
+			alr_exist(exist, value);
+		else
+			dont_exist(tok, new, name, value);
+		tok = tok->next;
 	}
-	j = i;
-	while (tok->value[i])
-		i++;
-	value = ft_substr(tok->value, j, i);
-	else
-		name = ft_strdup(tok->value);
-	exist = find_env(tok->value);
-	if (exist)
-		alr_exist(exist, value);
-	else
-		dont_exist(tok, new, name, value);
 }
