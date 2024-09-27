@@ -6,7 +6,7 @@
 #    By: pgrellie <pgrellie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/14 12:20:45 by apintus           #+#    #+#              #
-#    Updated: 2024/09/20 18:17:05 by pgrellie         ###   ########.fr        #
+#    Updated: 2024/09/24 17:22:40 by pgrellie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SRCS =	ft_isalpha.c\
 		ft_memcpy.c\
 		ft_memmove.c\
 		ft_strlcpy.c\
+		ft_strcat.c\
 		ft_strlcat.c\
 		ft_toupper.c\
 		ft_tolower.c\
@@ -39,12 +40,12 @@ SRCS =	ft_isalpha.c\
 		ft_atoi.c\
 		ft_atol.c\
 		ft_calloc.c\
+		ft_strcpy.c\
 		ft_strdup.c\
 		ft_substr.c\
 		ft_strjoin.c\
 		ft_strtrim.c\
 		ft_split.c\
-		ft_split_multi.c\
 		ft_itoa.c\
 		ft_strmapi.c\
 		ft_striteri.c\

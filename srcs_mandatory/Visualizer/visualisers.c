@@ -6,7 +6,7 @@
 /*   By: pgrellie <pgrellie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 15:23:10 by pgrellie          #+#    #+#             */
-/*   Updated: 2024/09/18 18:42:13 by pgrellie         ###   ########.fr       */
+/*   Updated: 2024/09/25 17:00:16 by pgrellie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,8 @@ const char	*get_token_type_name(t_token_type type)
 	token_type_names[7] = "REDIR_OUT";
 	token_type_names[8] = "HERE_DOC";
 	token_type_names[9] = "APPEND";
-	token_type_names[10] = "EXPAND";
-	token_type_names[11] = "LIMITER";
-	if (type >= 0 && type < 12)
+	token_type_names[10] = "LIMITER";
+	if (type >= 0 && type < 11)
 		return (token_type_names[type]);
 	return ("UNKNOWN");
 }

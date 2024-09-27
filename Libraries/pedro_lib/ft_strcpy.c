@@ -1,37 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgrellie <pgrellie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/25 15:29:28 by pgrellie          #+#    #+#             */
-/*   Updated: 2024/09/27 19:54:14 by pgrellie         ###   ########.fr       */
+/*   Created: 2024/09/24 16:34:05 by pgrellie          #+#    #+#             */
+/*   Updated: 2024/09/24 16:35:36 by pgrellie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "pedro_lib.h"
 
-int	main(int ac, char **av, char **env)
+char	*ft_strcpy(char *dest, const char *src)
 {
-	t_ms	*ms;
+	char	*original_dest;
 
-	if (ac == 1)
+	original_dest = dest;
+	while (*src)
 	{
-		(void)av;
-		ms = init_program(env);
-		the_program(ms);
-		free(ms);
+		*dest = *src;
+		dest++;
+		src++;
 	}
-	else
-		ft_putstr_fd("Arguments aren't allowed\n", 2);
-	return (0);
+	*dest = '\0';
+	return (original_dest);
 }
-
-	// printf("Helo");
-	// return (0);
-
-	// acceper uniquement les '|' et '<' et '>' et '<<' et '>>'
-
-	// faire deux listes chaines : une pour les tokens
-	// et une autres pour les expands

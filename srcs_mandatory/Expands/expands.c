@@ -6,100 +6,77 @@
 /*   By: pgrellie <pgrellie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 13:08:24 by pgrellie          #+#    #+#             */
-/*   Updated: 2024/09/23 13:29:34 by pgrellie         ###   ########.fr       */
+/*   Updated: 2024/09/27 18:11:51 by pgrellie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_env	*find_node(char *s, t_env *env)
+
+char	*double_dollar(char *fs)
 {
-	while (env)
-	{
-		if (strcmp(s, env->name) == 0)
-		{
-			return (env);
-		}
-		env = env->next;
-	}
-	return (NULL);
+	char	*new_fs;
+
+	new_fs = ft_strjoin(fs, "$$");
+	if (!new_fs)
+		return (NULL);
+	free(fs);
+	return (new_fs);
 }
 
-char	*tracker(t_token *tok)
+char	*dollar_bruh(char *fs, int *y, int v_return)
 {
-	int		x;
-	int		j;
+	char	*v_return_str;
+	char	*new_fs;
+
+	v_return_str = ft_itoa(v_return);
+	if (!v_return_str)
+		return (NULL);
+	new_fs = ft_strjoin(fs, v_return_str);
+	free(v_return_str);
+	if (!new_fs)
+		return (NULL);
+	*y += strlen(v_return_str);
+	free(fs);
+	return (new_fs);
+}
+
+char	*expand_env_value(char *fs, char *env_value, int *x, char *tok_value)
+{
 	char	*tmp;
 
-	x = 0;
-	while (tok->value[x])
-	{
-		if (tok->value[x] == '$' && tok->value[x + 1] == '$')
-			return (NULL);
-		if (ft_strchr(tok->value[x], '$'))
-		{
-			x++;
-			j = x;
-			while (!is_space(tok->value[x]) && tok->value[x] != '$')
-				x++;
-			tmp = ft_substr(tok->value, j, x - j);
-			if (!tmp)
-			{
-				ft_putstr_fd("Error: malloc failed mother fucker", 2);
-				return (NULL);
-			}
-		}
-	}
+	if (!fs || !env_value || !x || !tok_value)
+		return (NULL);
+	// printf("Debug: fs before join: %s\n", fs);
+	// printf("Debug: env_value: %s\n", env_value);
+	tmp = ft_strjoin(fs, env_value);
+	if (!tmp)
+		return (free(fs), NULL);
+	// printf("Debug: tmp after join: %s\n", tmp);
+	while (tok_value[*x] && (ft_isalnum(tok_value[*x]) || tok_value[*x] == '_'))
+		(*x)++;
 	return (tmp);
 }
 
-t_token	*dr_kron(t_token *tok, t_env *env)
+char	*expand_variable(t_token *tok, t_env *env, int *x, char *fs)
 {
-	t_token	*toks;
-	int		x;
-	char	*fs;
+	t_env	*ev;
 	char	*tmp;
 
-	x = 0;
-	fs = malloc(sizeof(char) * malloc_calculator(tok, env));
-	if (!fs)
-		return (NULL);
-	while (tok->value[x])
-	{
-		if (tok->value[x] == '$')
-		{
-			fs = ft_strjoin(tmp, env->value);
-		}
-		tmp = ft_copy(tok);
-		x++;
-	}
+	tmp = tracker(tok->value, x);
+	if (!tmp)
+		return (free(fs), NULL);
+	ev = find_node(tmp, env);
 	free(tmp);
-	return (toks);
+	if (!ev)
+		return (fs);
+	return (expand_env_value(fs, ev->value, x, tok->value));
 }
 
-t_token	*expander(t_ms *ms)
-{
-	t_token	*tok;
-	t_env	*env;
-	char	*tmp;
+/**************************************************************************************************************************************/
 
-	while (ms->tokens)
-	{
-		if (ms->tokens->type == WORD || ms->tokens->type == INFILE
-			|| ms->tokens->type == OUTFILE || ms->tokens->type == EXPAND
-			|| (ms->tokens->type == CMD && ms->tokens->prev == NULL))
-		{
-			tmp = tracker(ms->tokens);
-			tok = ms->tokens;
-			env = find_node(tmp, ms->env);
-			if (env)
-				tok = dr_kron(ms->tokens, env);
-			free(tmp);
-		}
-		ms->tokens = ms->tokens->next;
-	}
-	return (tok);
-}
+
+/**************************************************************************************************************************************/
 
 // Entre double quote -> remplacement
 
@@ -111,4 +88,62 @@ t_token	*expander(t_ms *ms)
 
 // Malloc la nouvelle chaine moins les quotes
 
-// $? -> renvoi la valeur de retour (A gerer a part des variables d'environnement)
+// $? -> renvoi la valeur de retour (A gerer a part
+// 			des variables d'environnement)avec EXIT_STATUS
+
+/**************************************************************************************************************************************/
+
+// char	*dr_kron(t_token *tok, t_env *env, int v_return)
+// {
+// 	t_env	*ev;
+// 	char	*fs;
+// 	char	*tmp;
+// 	int		x;
+// 	int		y;
+
+// 	if (!tok || !env || !tok->value || !env->value)
+// 		return (NULL);
+// 	x = 0;
+// 	y = 0;
+// 	fs = ft_calloc(1, sizeof(char) * ft_strlen(tok->value) + 1);
+// 	if (!fs)
+// 		return (NULL);
+// 	printf("Debug: fs after calloc: %s\n", fs);
+// 	while (tok->value[x])
+// 	{
+// 		if (tok->value[x] == '$' && tok->value[x + 1] == '?')
+// 		{
+// 			fs = dollar_bruh(fs, &x, v_return);
+// 			if (!fs)
+// 				return (NULL);
+// 			y = ft_strlen(fs);
+// 		}
+// 		if (tok->value[x] == '$' && expandable(tok->value, &x))
+// 		{
+// 			tmp = tracker(tok->value, &x);
+// 			if (!tmp)
+// 				return (free(fs), NULL);
+// 			printf("Debug: tracker returned %s\n", tmp);
+// 			ev = find_node(tmp, env);
+// 			free(tmp);
+// 			if (!ev)
+// 				continue ;
+// 			printf("name: \033[0;36m %-20s \033[0m |\t \
+// 				value: \033[0;35m %-18s \033[0m \n%d",
+// 				ev->name, ev->value, ev->equal_sign);
+// 			printf("--------------------------------------------------\n");
+// 			fs = expand_env_value(fs, ev->value, &x, tok->value);
+// 			printf("Debug: fs after expand_env_value: %s\n", fs);
+// 			y = ft_strlen(fs);
+// 		}
+// 		else
+// 		{
+// 			fs[y++] = tok->value[x++];
+// 			printf("Debug: y incremented to: %d\n", y);
+// 		}
+// 	}
+// 	fs[y] = '\0';
+// 	printf("Debug: y incremented to: %d\n", y);
+// 	printf("Debug: final fs: %s\n", fs);
+// 	return (transformer(tok, fs));
+// }

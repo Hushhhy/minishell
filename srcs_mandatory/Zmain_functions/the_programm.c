@@ -6,7 +6,7 @@
 /*   By: pgrellie <pgrellie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 15:51:23 by pgrellie          #+#    #+#             */
-/*   Updated: 2024/09/20 16:50:48 by pgrellie         ###   ########.fr       */
+/*   Updated: 2024/09/27 20:16:05 by pgrellie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	the_program(t_ms *ms)
 		if (full_check(ms->prompt) == true)
 		{
 			ms->tokens = lexer(ms->prompt);
-			ms->tokens = expander(ms);
+			expander(ms);
 		}
 		// handle_here_doc(ms, &ms->tokens);
 		// executor(ms);

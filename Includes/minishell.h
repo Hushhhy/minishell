@@ -6,7 +6,7 @@
 /*   By: pgrellie <pgrellie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 15:22:22 by pgrellie          #+#    #+#             */
-/*   Updated: 2024/09/23 13:05:20 by pgrellie         ###   ########.fr       */
+/*   Updated: 2024/09/27 20:14:33 by pgrellie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <signal.h>
 # include <errno.h>
 # include <stdio.h>
+# include <stddef.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 
@@ -42,6 +43,12 @@
 # define CTRL_BS 131
 
 /************************/
+/*    GLOBAL VARIABLE   */
+/************************/
+
+extern int	g_var;
+
+/************************/
 /*      STRUCTURES      */
 /************************/
 
@@ -57,7 +64,6 @@ typedef enum s_token_type
 	REDIR_OUT,
 	HERE_DOC,
 	APPEND,
-	EXPAND,
 	LIMITER,
 }				t_token_type;
 
@@ -129,13 +135,6 @@ bool			c_check(char *s);
 bool			shit_check_1(char *s);
 bool			full_check(char *s);
 
-// Expander functions
-
-int				malloc_calculator(t_token *tok, t_env *env);
-char			*tracker(t_token *tok);
-char			*ft_copy(char *str);
-t_token			*expander(t_ms *ms);
-
 // Env funtions
 
 t_env			*find_lastv(t_env *env);
@@ -159,6 +158,25 @@ t_token_type	da_tok(char *s, t_token *previous);
 t_token			*lexer(char *input);
 void			delete_token(t_token **head, t_token *node_to_del);
 void			free_tokens(t_token **head);
+
+// Expander functions
+
+void			*ft_realloc(void *ptr, size_t old_size, size_t new_size);
+char			*tracker(char *s, int *x);
+char			*transformer(t_token *tok, char *fs);
+char			*expand_env_value(char *fs, char *env_value,
+					int *x, char *tok_value);
+char			*double_dollar(char *fs);
+char			*dollar_bruh(char *fs, int *y, int v_return);
+bool			expandable(const char *str, size_t pos);
+t_env			*find_node(char *s, t_env *env);
+char			*expand_variable(t_token *tok, t_env *env, int *x, char *fs);
+char			*process_token_value(t_token *tok,
+					t_env *env, int v_return, char *fs);
+void			dr_kron(t_token *tok, t_env *env, int v_return);
+void			finishing(t_token *tok);
+void			remove_quotes(char *str);
+void			expander(t_ms *ms);
 
 //PIPEX
 char			*cmd_path(char **envi, char *cmd);

@@ -6,7 +6,7 @@
 /*   By: pgrellie <pgrellie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 12:52:47 by pgrellie          #+#    #+#             */
-/*   Updated: 2024/09/18 18:38:50 by pgrellie         ###   ########.fr       */
+/*   Updated: 2024/09/24 17:40:50 by pgrellie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_env	*init_env(char **env)
 			return (NULL);
 		j++;
 	}
-	display_envi(envi);
+	// display_envi(envi);
 	return (envi);
 }
 

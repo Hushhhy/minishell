@@ -6,7 +6,7 @@
 /*   By: pgrellie <pgrellie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 15:57:14 by pgrellie          #+#    #+#             */
-/*   Updated: 2024/09/19 12:37:51 by pgrellie         ###   ########.fr       */
+/*   Updated: 2024/09/25 16:59:50 by pgrellie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@ t_token_type	da_tok(char *s, t_token *previous)
 		return (HERE_DOC);
 	else if (ft_strcmp(s, ">>") == 0)
 		return (APPEND);
-	else if (s[0] == '$')
-		return (EXPAND);
 	else if (s[0] == '-')
 		return (ARG);
 	else

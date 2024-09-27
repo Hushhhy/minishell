@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgrellie <pgrellie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/24 16:26:04 by pgrellie          #+#    #+#             */
-/*   Updated: 2024/09/24 16:28:23 by pgrellie         ###   ########.fr       */
+/*   Created: 2024/09/24 17:20:16 by pgrellie          #+#    #+#             */
+/*   Updated: 2024/09/24 17:24:33 by pgrellie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pedro_lib.h"
 
-int	ft_strcmp(const char *s1, const char *s2)
+char	*ft_strcat(char *dest, const char *src)
 {
-	while (*s1 && (*s1 == *s2))
-	{
-		s1++;
-		s2++;
-	}
-	return (*(unsigned char *)s1 - *(unsigned char *)s2);
+	char	*ptr;
+
+	ptr = dest + ft_strlen(dest);
+	while (*src != '\0')
+		*ptr++ = *src++;
+	*ptr = '\0';
+	return (dest);
 }

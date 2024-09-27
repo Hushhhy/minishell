@@ -1,37 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   the_expander.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgrellie <pgrellie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/25 15:29:28 by pgrellie          #+#    #+#             */
-/*   Updated: 2024/09/27 19:54:14 by pgrellie         ###   ########.fr       */
+/*   Created: 2024/09/26 15:44:40 by pgrellie          #+#    #+#             */
+/*   Updated: 2024/09/27 18:52:51 by pgrellie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(int ac, char **av, char **env)
+void	expander(t_ms *ms)
 {
-	t_ms	*ms;
-
-	if (ac == 1)
+	while (ms->tokens)
 	{
-		(void)av;
-		ms = init_program(env);
-		the_program(ms);
-		free(ms);
+		if (ms->tokens->type == WORD || ms->tokens->type == INFILE
+			|| ms->tokens->type == OUTFILE
+			|| (ms->tokens->type == CMD && ms->tokens->prev == NULL))
+		{
+			if (ms->tokens->value)
+			{
+				dr_kron(ms->tokens, ms->env, ms->v_return);
+				finishing(ms->tokens);
+				display_tokens(ms->tokens);
+			}
+		}
+		ms->tokens = ms->tokens->next;
 	}
-	else
-		ft_putstr_fd("Arguments aren't allowed\n", 2);
-	return (0);
 }
-
-	// printf("Helo");
-	// return (0);
-
-	// acceper uniquement les '|' et '<' et '>' et '<<' et '>>'
-
-	// faire deux listes chaines : une pour les tokens
-	// et une autres pour les expands
