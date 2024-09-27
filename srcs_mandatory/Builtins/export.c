@@ -47,9 +47,9 @@ void	ft_export(t_token *tok, t_env *env)
 	int		i;
 	int		j;
 
-	value = NULL;
 	i = 0;
 	j = 0;
+	value = NULL;
 	if (!tok->next)
 		print_export(env);
 	while (tok->value[i] && tok->value[i] != '=')
@@ -57,13 +57,13 @@ void	ft_export(t_token *tok, t_env *env)
 	if (tok->value[i] == '=')
 	{
 		j = i;
-		name = ft_substr(tok->value, j, i + 1);
+		name = ft_substr(tok->value, j, i);
 		i++;
 	}
 	j = i;
 	while (tok->value[i])
 		i++;
-	value = ft_substr(tok->value, j, i + 1);
+	value = ft_substr(tok->value, j, i);
 	else
 		name = ft_strdup(tok->value);
 	exist = find_env(tok->value);
