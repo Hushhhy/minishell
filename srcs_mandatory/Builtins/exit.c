@@ -13,7 +13,7 @@
 
 int	is_num(const char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (str[i] == '-' || str[i] == '+')
@@ -29,7 +29,7 @@ int	is_num(const char *str)
 
 void	ft_exit(t_token *tok)
 {
-	int exit_stat;
+	int	exit_stat;
 
 	exit_stat = 0;
 	if (!tok->next)

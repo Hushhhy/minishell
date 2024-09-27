@@ -6,7 +6,7 @@
 /*   By: acarpent <acarpent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 14:38:35 by acarpent          #+#    #+#             */
-/*   Updated: 2024/09/26 13:03:15 by acarpent         ###   ########.fr       */
+/*   Updated: 2024/09/27 13:54:26 by acarpent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 char	*get_cwd(void)
 {
-	char *pwd;
-	char *cwd;
+	char	*pwd;
+	char	*cwd;
 
 	pwd = getenv("PWD");
 	cwd = NULL;
@@ -35,18 +35,18 @@ char	*get_cwd(void)
 
 void	ft_pwd(t_env *env)
 {
-    char *cwd;
+	char	*cwd;
 
-    cwd = get_cwd();
-    if (!cwd)
-        return ;
-    printf("%s\n", cwd);
-    free(cwd);
+	cwd = get_cwd();
+	if (!cwd)
+		return ;
+	printf("%s\n", cwd);
+	free(cwd);
 }
 
-int if_cd(const char *path)
+int	if_cd(const char *path)
 {
-	char *new_cwd;
+	char	*new_cwd;
 
 	if (chdir(path) != 0)
 	{

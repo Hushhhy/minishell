@@ -1,30 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   ctrl_d.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acarpent <acarpent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/23 14:57:06 by acarpent          #+#    #+#             */
-/*   Updated: 2024/09/27 13:50:00 by acarpent         ###   ########.fr       */
+/*   Created: 2024/09/27 14:53:35 by acarpent          #+#    #+#             */
+/*   Updated: 2024/09/27 15:06:38 by acarpent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	print_env(t_env *env)
+void	ft_signals(void)
 {
-	while (env)
+	char	*input;
+
+	sigint_handler();
+	sigquit_handler();
+	while (1)
 	{
-		if (env->equal_sign == 1)
+		input = readline("minishell> ");
+		if (input == NULL)
 		{
-			printf("%s", env->name);
-			printf("=");
+			printf("exit\n");
+			break ;
 		}
-		if (env->value)
-			printf("%s\n", env->value);
-		else
-			printf("\n");
-		env = env->next;
+		add_history(input);
+		free(input);
 	}
 }

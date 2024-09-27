@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   ctrl_c.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acarpent <acarpent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/23 14:57:06 by acarpent          #+#    #+#             */
-/*   Updated: 2024/09/27 13:50:00 by acarpent         ###   ########.fr       */
+/*   Created: 2024/09/27 14:46:42 by acarpent          #+#    #+#             */
+/*   Updated: 2024/09/27 15:07:16 by acarpent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	print_env(t_env *env)
+void	ft_sigint_handler(int sig)
 {
-	while (env)
-	{
-		if (env->equal_sign == 1)
-		{
-			printf("%s", env->name);
-			printf("=");
-		}
-		if (env->value)
-			printf("%s\n", env->value);
-		else
-			printf("\n");
-		env = env->next;
-	}
+	(void)sig;
+	printf("\n");
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
+}
+
+void	ft_sigint_setup(void)
+{
+	struct sigaction	sa;
+	char				*input;
+
+	sa.sa_handler = sigint_handler;
+	sigemptyset(&sa.sa_mask);
+	sa.sa_flags = SA_RESTART;
+	sigaction(SIGINT, &sa, NULL);
 }

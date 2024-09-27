@@ -6,7 +6,7 @@
 /*   By: acarpent <acarpent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 15:22:22 by pgrellie          #+#    #+#             */
-/*   Updated: 2024/09/26 15:14:34 by acarpent         ###   ########.fr       */
+/*   Updated: 2024/09/27 15:04:46 by acarpent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef enum s_token_type
 	CMD,
 	ARG,
 	WORD,
+	ASSIGNMENT,
 	PIPE,
 	INFILE,
 	OUTFILE,
@@ -109,10 +110,44 @@ typedef struct s_ms
 
 // MINISHELL
 
-// Builtin
+//------------------BUILTINS----------//
+
+void			builtins(t_token *tok, t_env *env);
+
+void			ft_cd(t_token *tok);
+void			changedir(const char *path);
+
+void			ft_echo(t_token *tok);
 
 void			print_env(t_env *env);
-void			echo(t_token *tok);
+
+void			ft_exit(t_token *tok);
+int				is_num(const char *str);
+
+void			ft_export(t_token *tok, t_env *env);
+void			export_handle(t_env *env, t_token *tok);
+void			print_export(t_env *env);
+t_env			*find_env(t_env *env, const char *find);
+int				no_args(t_env *env);
+void			swap_list(t_env *a, t_env *b);
+void			dont_exist(t_token *tok, t_env *new, char *name, char *value);
+void			alr_exist(t_env *exist, char *value);
+
+char			*get_cwd(void);
+void			ft_pwd(t_env *env);
+int				if_cd(const char *path);
+
+void			ft_unset(t_token *tok, t_env *env);
+
+//-------------------SIGNALS--------------//
+
+void			ft_signals();
+
+void			ft_sigint_handler(int sig);
+void			ft_sigint_setup();
+
+void			ft_sigquit_handler(int sig);
+void			ft_sigquit_setup();
 
 // The program
 

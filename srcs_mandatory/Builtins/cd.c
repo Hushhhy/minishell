@@ -14,8 +14,8 @@
 
 void	changedir(const char *path)
 {
-	char *old;
-	char *new;
+	char	*old;
+	char	*new;
 
 	old = getenv("PWD");
 	if (chdir(path) != 0)

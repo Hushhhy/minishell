@@ -6,7 +6,7 @@
 /*   By: acarpent <acarpent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 14:27:28 by acarpent          #+#    #+#             */
-/*   Updated: 2024/09/26 13:03:19 by acarpent         ###   ########.fr       */
+/*   Updated: 2024/09/27 13:54:47 by acarpent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	ft_unset(t_token *tok, t_env *env)
 {
-	int i;
-	int len;
+	int	i;
+	int	len;
 
 	i = 0;
 	len = ft_strlen(tok->value);
