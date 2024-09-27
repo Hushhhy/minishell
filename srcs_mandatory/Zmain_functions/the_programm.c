@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   the_programm.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgrellie <pgrellie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: acarpent <acarpent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 15:51:23 by pgrellie          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/09/27 20:16:05 by pgrellie         ###   ########.fr       */
+=======
+/*   Updated: 2024/09/24 14:38:30 by acarpent         ###   ########.fr       */
+>>>>>>> origin/main
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +62,7 @@ t_ms	*init_program(char **env)
 	// signals_handler();
 	ms = init_ms();
 	ms->env = init_env(env);
+	print_env(ms->env);
 	if (ms->env == NULL)
 	{
 		printf("Error: couldn't allocate memory\n");
@@ -74,10 +79,12 @@ void	the_program(t_ms *ms)
 		if (ft_strcmp(ms->prompt, "exit") == 0)
 			break ;
 		if (full_check(ms->prompt) == true)
-		{
 			ms->tokens = lexer(ms->prompt);
+<<<<<<< HEAD
 			expander(ms);
 		}
+=======
+>>>>>>> origin/main
 		// handle_here_doc(ms, &ms->tokens);
 		// executor(ms);
 		free_tokens(&ms->tokens);
