@@ -18,7 +18,8 @@ void	print_export(t_env *env)
 	{
 		printf("export ");
 		printf("%s", env->name);
-		printf("=");
+		if (env->equal_sign == 1)
+			printf("=");
 		if (env->value)
 			printf("%s\n", env->value);
 		else
@@ -43,19 +44,26 @@ void	ft_export(t_token *tok, t_env *env)
 	char	*name;
 	char	*value;
 	t_env	*new;
+	int		i;
+	int		j;
 
 	value = NULL;
+	i = 0;
+	j = 0;
 	if (!tok->next)
 		print_export(env);
-	if (tok->type == ASSIGNMENT)
+	while (tok->value[i] && tok->value[i] != '=')
+		i++;
+	if (tok->value[i] == '=')
 	{
-		equal = ft_strchr(tok->value, '=');
-		if (equal)
-		{
-			name = strndup(tok->value, equal - tok->value);
-			value = ft_strdup(equal + 1);
-		}
+		j = i;
+		name = ft_substr(tok->value, j, i + 1);
+		i++;
 	}
+	j = i;
+	while (tok->value[i])
+		i++;
+	value = ft_substr(tok->value, j, i + 1);
 	else
 		name = ft_strdup(tok->value);
 	exist = find_env(tok->value);
