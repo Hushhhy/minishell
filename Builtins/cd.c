@@ -1,0 +1,48 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cd.c                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: acarpent <acarpent@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/26 15:12:43 by acarpent          #+#    #+#             */
+/*   Updated: 2024/09/26 15:12:43 by acarpent         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "minishell.h"
+
+void	changedir(const char *path)
+{
+	char	*old;
+	char	*new;
+
+	old = getenv("PWD");
+	if (chdir(path) != 0)
+		perror("cd");
+	else
+	{
+		setenv("OLDPWD", old, 1);
+		new = getcwd(NULL, 0);
+		setenv("PWD", new, 1);
+		free(new);
+	}
+}
+
+void	ft_cd(t_token *tok)
+{
+	if (tok)
+		changedir(getenv("HOME"));
+	if (tok->next)
+	{
+		if (ft_strcmp(tok->next->value, "-") == 0)
+		{
+			changedir(getenv("OLDPWD"));
+			printf("%s\n", getenv("PWD"));
+		}
+		else
+			changedir(tok->next->value);
+	}
+	else
+		printf("Too many arguments\n");
+}
