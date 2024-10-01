@@ -12,17 +12,20 @@
 
 #include "minishell.h"
 
-void	changedir(const char *path)
+void	changedir(char *path)
 {
-	char	*old;
-	char	*new;
+	char		*new;
 
-	old = getenv("PWD");
 	if (chdir(path) != 0)
-		perror("cd");
+	{
+		ft_putstr_fd("minishell: cd: ", 2);
+		ft_putstr_fd(path, 2);
+		ft_putstr_fd(": ", 2);
+		ft_putstr_fd(strerror(errno), 2);
+		ft_putstr_fd("\n", 2);
+	}
 	else
 	{
-		setenv("OLDPWD", old, 1);
 		new = getcwd(NULL, 0);
 		setenv("PWD", new, 1);
 		free(new);
@@ -31,15 +34,16 @@ void	changedir(const char *path)
 
 void	ft_cd(t_token *tok)
 {
-	if (tok)
+	if (!tok->next)
 		changedir(getenv("HOME"));
-	if (tok->next)
+	else if (tok->next)
 	{
-		if (ft_strcmp(tok->next, "-") == 0)
-			changedir(getenv("OLDPWD"));
+		tok = tok->next;
+		if (tok->next)
+			ft_putstr_fd("minishel: cd: too many arguments\n", 2);
 		else
-			changedir(tok->next);
+			changedir(tok->value);
 	}
 	else
-		printf("Too many arguments\n");
+		ft_putstr_fd("minishell: cd: usage: cd <path>\n", 2);
 }

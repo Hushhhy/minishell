@@ -6,7 +6,7 @@
 /*   By: acarpent <acarpent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 15:33:38 by acarpent          #+#    #+#             */
-/*   Updated: 2024/09/27 13:49:14 by acarpent         ###   ########.fr       */
+/*   Updated: 2024/09/30 16:52:30 by acarpent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_echo(t_token *tok)
 	if (tok->next)
 	{
 		tok = tok->next;
-		if (tok && ft_strcmp(tok->next->value, "-n") == 0)
+		if (ft_strcmp(tok->value, "-n") == 0)
 		{
 			nl = 0;
 			tok = tok->next;

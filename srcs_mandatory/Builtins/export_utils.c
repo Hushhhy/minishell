@@ -6,7 +6,7 @@
 /*   By: acarpent <acarpent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 15:34:42 by acarpent          #+#    #+#             */
-/*   Updated: 2024/09/27 13:58:11 by acarpent         ###   ########.fr       */
+/*   Updated: 2024/10/01 15:32:39 by acarpent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,47 +22,60 @@ void	alr_exist(t_env *exist, char *value)
 	exist->equal_sign = (value != NULL);
 }
 
-void	dont_exist(t_token *tok, t_env *new, char *name, char *value)
+void	dont_exist(t_ms *ms, t_env *new, char *name, char *value)
 {
 	new = (t_env *)malloc(sizeof(t_env));
 	new->name = name;
 	new->value = value;
 	new->equal_sign = (value != NULL);
-	new->next = tok;
+	new->next = ms->env->next;
 	new->prev = NULL;
-	if (tok)
-		tok->prev = new;
-	tok = new;
+	if (ms->env)
+		ms->env->prev = new;
+	ms->env = new;
 }
 
-void	swap_list(t_env *a, t_env *b)
+void	swap_list(t_env *cur, t_env *next)
 {
-	t_env	*tmp;
+	char	*tmpn;
+	char	*tmpv;
+	int		tmpe;
 
-	tmp = a;
-	a = b;
-	b = tmp;
+	tmpn = cur->name;
+	tmpv = cur->value;
+	tmpe = cur->equal_sign;
+	cur->name = next->name;
+	cur->value = next->value;
+	cur->equal_sign = next->equal_sign;
+	next->name = tmpn;
+	next->value = tmpv;
+	next->equal_sign = tmpe;
 }
 
-int	no_args(t_env *env)
+void	no_args(t_env *env)
 {
-	int	sorted;
+	int		sorted;
+	t_env	*lptr;
+	t_env	*ptr;
 
 	if (env == NULL)
 		return ;
-	sorted = 0;
-	while (sorted == 0)
+	sorted = 1;
+	lptr = NULL;
+	while (sorted)
 	{
-		sorted = 1;
-		while (env != NULL && env->next != NULL)
+		sorted = 0;
+		ptr = env;
+		while (ptr && ptr->next != lptr)
 		{
-			if (ft_strcmp(env->name, env->next->name) > 0)
+			if (ft_strcmp(ptr->name, ptr->next->name) > 0)
 			{
-				swap_list(env, env->next);
-				sorted = 0;
+				swap_list(ptr, ptr->next);
+				sorted = 1;
 			}
-			env = env->next;
+			ptr = ptr->next;
 		}
+		lptr = ptr;
 	}
 }
 
