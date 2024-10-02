@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexing.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgrellie <pgrellie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: acarpent <acarpent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 17:35:23 by pgrellie          #+#    #+#             */
-/*   Updated: 2024/09/20 16:47:50 by pgrellie         ###   ########.fr       */
+/*   Updated: 2024/10/02 17:01:42 by acarpent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	handle_word(char *s, int *x, t_token **tok)
 	int		i;
 	char	quote;
 	bool	in_quotes;
+	char	*tmp;
 
 	i = *x;
 	in_quotes = false;
@@ -50,7 +51,9 @@ void	handle_word(char *s, int *x, t_token **tok)
 		}
 		*x += 1;
 	}
-	add_token(tok, ft_substr(s, i, *x - i));
+	tmp = ft_substr(s, i, *x - i);
+	add_token(tok, tmp);
+	free(tmp);
 }
 
 void	butcher(char *s, t_token **tok)

@@ -6,7 +6,7 @@
 /*   By: acarpent <acarpent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 15:22:22 by pgrellie          #+#    #+#             */
-/*   Updated: 2024/10/01 16:22:27 by acarpent         ###   ########.fr       */
+/*   Updated: 2024/10/02 18:26:00 by acarpent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ typedef enum s_token_type
 	HERE_DOC,
 	APPEND,
 	LIMITER,
-	EXPAND,
 }				t_token_type;
 
 typedef struct s_pipe
@@ -154,6 +153,13 @@ void			ft_sigint_setup(void);
 void			ft_sigquit_handler(int sig);
 void			ft_sigquit_setup(void);
 
+//------------------Here Doc--------------//
+
+void			handle_here_doc(t_token *tok);
+void			papa_proces(pid_t pid);
+void			read_until_limit(char *limiteur);
+void			start_pipe(char *limiteur);
+
 // The program
 
 t_ms			*init_ms(void);
@@ -197,6 +203,7 @@ t_token_type	da_tok(char *s, t_token *previous);
 t_token			*lexer(char *input);
 void			delete_token(t_token **head, t_token *node_to_del);
 void			free_tokens(t_token **head);
+
 
 // Expander functions
 

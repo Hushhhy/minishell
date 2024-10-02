@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quote_checker.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgrellie <pgrellie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: acarpent <acarpent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 15:17:11 by pgrellie          #+#    #+#             */
-/*   Updated: 2024/09/12 16:41:11 by pgrellie         ###   ########.fr       */
+/*   Updated: 2024/10/02 17:00:40 by acarpent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ bool	q_check(char *s)
 	char	quote;
 	int		x;
 
+	if (!s)
+		return (false);
 	x = 0;
 	quote = 'K';
 	while (s[x])
