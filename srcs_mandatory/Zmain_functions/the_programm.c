@@ -6,10 +6,9 @@
 /*   By: acarpent <acarpent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 15:51:23 by pgrellie          #+#    #+#             */
-/*   Updated: 2024/10/02 18:26:12 by acarpent         ###   ########.fr       */
+/*   Updated: 2024/10/04 16:06:26 by acarpent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "minishell.h"
 
@@ -72,6 +71,7 @@ t_ms	*init_program(char **env)
 
 void	the_program(t_ms *ms)
 {
+	rl_outstream = stderr;
 	while (true)
 	{
 		ms->prompt = prompt(ms);
@@ -86,7 +86,7 @@ void	the_program(t_ms *ms)
 			builtins(ms, ms->tokens);
 			// expander(ms);
 		}
-		handle_here_doc(ms, ms->tokens);
+		handle_here_doc(ms->tokens);
 		// executor(ms);
 		free_tokens(&ms->tokens);
 		free(ms->prompt);

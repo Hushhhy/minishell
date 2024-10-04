@@ -6,7 +6,7 @@
 /*   By: acarpent <acarpent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 15:22:22 by pgrellie          #+#    #+#             */
-/*   Updated: 2024/10/02 18:26:00 by acarpent         ###   ########.fr       */
+/*   Updated: 2024/10/04 16:52:44 by acarpent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # include <stddef.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <setjmp.h>
 
 /************************/
 /*       DEFINES        */
@@ -156,8 +157,9 @@ void			ft_sigquit_setup(void);
 //------------------Here Doc--------------//
 
 void			handle_here_doc(t_token *tok);
-void			papa_proces(pid_t pid);
-void			read_until_limit(char *limiteur);
+bool			line_error(int l, char *line, char *limiter);
+void			papa_proces(pid_t pid, int pipefd[2]);
+void			read_until_limit(char *limiteur, int pipefd);
 void			start_pipe(char *limiteur);
 
 // The program
