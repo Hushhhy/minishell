@@ -6,7 +6,7 @@
 /*   By: acarpent <acarpent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 15:22:22 by pgrellie          #+#    #+#             */
-/*   Updated: 2024/10/04 16:52:44 by acarpent         ###   ########.fr       */
+/*   Updated: 2024/10/08 14:47:28 by acarpent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@
 # include <stddef.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include <setjmp.h>
 
 /************************/
 /*       DEFINES        */
@@ -99,7 +98,6 @@ typedef struct s_env
 	struct s_env	*prev;
 }				t_env;
 
-
 typedef struct s_ms
 {
 	char	*prompt;
@@ -148,6 +146,7 @@ void			del_node(t_env *env, t_env *delete);
 
 void			ft_signals(void);
 
+void			sigint_here_doc(int sig);
 void			ft_sigint_handler(int sig);
 void			ft_sigint_setup(void);
 
@@ -161,6 +160,8 @@ bool			line_error(int l, char *line, char *limiter);
 void			papa_proces(pid_t pid, int pipefd[2]);
 void			read_until_limit(char *limiteur, int pipefd);
 void			start_pipe(char *limiteur);
+void			close_pipe(int fd1, int fd2);
+void			arg_not_found(char *s);
 
 // The program
 
@@ -205,7 +206,6 @@ t_token_type	da_tok(char *s, t_token *previous);
 t_token			*lexer(char *input);
 void			delete_token(t_token **head, t_token *node_to_del);
 void			free_tokens(t_token **head);
-
 
 // Expander functions
 
