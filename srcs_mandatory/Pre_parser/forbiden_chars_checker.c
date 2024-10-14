@@ -6,7 +6,7 @@
 /*   By: acarpent <acarpent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 14:32:14 by pgrellie          #+#    #+#             */
-/*   Updated: 2024/10/02 16:26:14 by acarpent         ###   ########.fr       */
+/*   Updated: 2024/10/10 15:59:24 by acarpent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ bool	in_out_check(void)
 bool	is_forbiden_char(char c, char next_c, char next_next_c)
 {
 	return (c == '&' || c == ';' || c == '%'
-		|| c == '\t' || c == '\v' || c == '\f'
+		|| c == '\v' || c == '\f'
 		|| c == '\r' || c == '\n'
 		|| c == ',' || c == '(' || c == ')'
 		|| (c == '&' && next_c == '&')

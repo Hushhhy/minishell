@@ -6,7 +6,7 @@
 /*   By: acarpent <acarpent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 18:19:14 by pgrellie          #+#    #+#             */
-/*   Updated: 2024/10/02 17:03:55 by acarpent         ###   ########.fr       */
+/*   Updated: 2024/10/08 14:44:57 by acarpent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ bool	shit_check_1(char *s)
 	int	x;
 
 	x = 0;
-	if (s[x] && s[x + 1] && s[x + 2] &&
-		ft_isshit_1(s[x], s[x + 1], s[x + 2]))
+	if (s[x] && s[x + 1] && s[x + 2]
+		&& ft_isshit_1(s[x], s[x + 1], s[x + 2]))
 		return (false);
 	while (s[x])
 		x++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgrellie <pgrellie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: acarpent <acarpent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 13:43:59 by pgrellie          #+#    #+#             */
-/*   Updated: 2024/09/17 18:26:28 by pgrellie         ###   ########.fr       */
+/*   Updated: 2024/10/08 14:46:07 by acarpent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ t_token	*find_last(t_token *tok)
 		tmp = tmp->next;
 	return (tmp);
 }
-
 
 // int	token_len(t_token *tok)
 // {

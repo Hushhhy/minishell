@@ -6,7 +6,7 @@
 /*   By: acarpent <acarpent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 14:46:42 by acarpent          #+#    #+#             */
-/*   Updated: 2024/10/07 16:53:46 by acarpent         ###   ########.fr       */
+/*   Updated: 2024/10/14 14:43:10 by acarpent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	sigint_here_doc(int sig)
 {
 	if (sig == SIGINT)
 		printf("\n");
-	exit(0);
 }
 
 void	ft_sigint_setup(void)

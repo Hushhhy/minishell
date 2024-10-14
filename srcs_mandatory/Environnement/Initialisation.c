@@ -6,7 +6,7 @@
 /*   By: acarpent <acarpent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 12:52:47 by pgrellie          #+#    #+#             */
-/*   Updated: 2024/09/30 16:15:25 by acarpent         ###   ########.fr       */
+/*   Updated: 2024/10/08 14:44:19 by acarpent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ t_env	*init_env(char **env)
 			return (NULL);
 		j++;
 	}
-	// display_envi(envi);
 	return (envi);
 }
 

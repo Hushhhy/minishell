@@ -6,7 +6,7 @@
 /*   By: acarpent <acarpent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 15:22:22 by pgrellie          #+#    #+#             */
-/*   Updated: 2024/10/08 14:47:28 by acarpent         ###   ########.fr       */
+/*   Updated: 2024/10/14 14:55:08 by acarpent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@
 /*    GLOBAL VARIABLE   */
 /************************/
 
-extern int	g_var;
+extern int	*g_var;
 
 /************************/
 /*      STRUCTURES      */
@@ -122,6 +122,7 @@ void			ft_cd(t_token *tok);
 void			changedir(char *path);
 
 void			ft_echo(t_token *tok);
+void			expand_var(char *s);
 
 void			print_env(t_token *tok, t_env *env);
 
@@ -153,15 +154,20 @@ void			ft_sigint_setup(void);
 void			ft_sigquit_handler(int sig);
 void			ft_sigquit_setup(void);
 
+t_ms			*get_ms(void);
+
 //------------------Here Doc--------------//
 
-void			handle_here_doc(t_token *tok);
+int				handle_here_doc(t_token *tok);
 bool			line_error(int l, char *line, char *limiter);
-void			papa_proces(pid_t pid, int pipefd[2]);
+int				papa_proces(pid_t pid, int pipefd[2]);
 void			read_until_limit(char *limiteur, int pipefd);
-void			start_pipe(char *limiteur);
+int				start_pipe(char *limiteur);
 void			close_pipe(int fd1, int fd2);
 void			arg_not_found(char *s);
+int				parse_here_doc(t_token *tok);
+void			here_doc_count(t_token *tok);
+void			exit_here_doc(t_ms *ms);
 
 // The program
 

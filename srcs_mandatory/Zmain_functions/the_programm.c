@@ -6,7 +6,7 @@
 /*   By: acarpent <acarpent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 15:51:23 by pgrellie          #+#    #+#             */
-/*   Updated: 2024/10/04 16:06:26 by acarpent         ###   ########.fr       */
+/*   Updated: 2024/10/14 15:20:06 by acarpent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,7 @@ t_ms	*init_ms(void)
 		printf("Error: couldn't allocate memory\n");
 		exit(1);
 	}
-	ms->prompt = NULL;
-	ms->env = NULL;
-	ms->tokens = NULL;
-	ms->v_return = 0;
-	ms->t_count = 0;
+	*ms = (t_ms){0};
 	return (ms);
 }
 
@@ -85,9 +81,10 @@ void	the_program(t_ms *ms)
 			ms->tokens = lexer(ms->prompt);
 			builtins(ms, ms->tokens);
 			// expander(ms);
+			// executor(ms);
 		}
-		handle_here_doc(ms->tokens);
-		// executor(ms);
+		if (handle_here_doc(ms->tokens))
+			free_tokens(&ms->tokens);
 		free_tokens(&ms->tokens);
 		free(ms->prompt);
 	}
