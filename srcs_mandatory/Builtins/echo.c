@@ -6,11 +6,27 @@
 /*   By: acarpent <acarpent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 15:33:38 by acarpent          #+#    #+#             */
-/*   Updated: 2024/10/10 15:45:00 by acarpent         ###   ########.fr       */
+/*   Updated: 2024/10/16 15:32:22 by acarpent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+bool	only_n(char *s)
+{
+	int	i;
+
+	i = 0;
+	if (s[0] == '-' && s[1] == 'n')
+		i += 2;
+	while (s[i])
+	{
+		if (s[i] != 'n')
+			return (false);
+		i++;
+	}
+	return (true);
+}
 
 void	expand_var(char *s)
 {
@@ -25,13 +41,14 @@ void	expand_var(char *s)
 		if (env_val)
 		{
 			*var_s = '\0';
-			printf("%s%s", s, env_val);
+			ft_putstr_fd(s, 1);
+			ft_putstr_fd(env_val, 1);
 		}
 		else
-			printf ("%s", s);
+			ft_putstr_fd(s, 1);
 	}
 	else
-		printf("%s", s);
+		ft_putstr_fd(s, 1);
 }
 
 void	ft_echo(t_token *tok)
@@ -42,7 +59,7 @@ void	ft_echo(t_token *tok)
 	if (tok->next)
 	{
 		tok = tok->next;
-		if (ft_strcmp(tok->value, "-n") == 0)
+		if (only_n(tok->value))
 		{
 			nl = 0;
 			tok = tok->next;
@@ -51,12 +68,12 @@ void	ft_echo(t_token *tok)
 		{
 			expand_var(tok->value);
 			if (tok->next)
-				printf(" ");
+				ft_putstr_fd(" ", 1);
 			tok = tok->next;
 		}
 		if (nl)
-			printf("\n");
+			ft_putstr_fd("\n", 1);
 	}
 	else
-		printf("\n");
+		ft_putstr_fd("\n", 1);
 }

@@ -6,7 +6,7 @@
 /*   By: acarpent <acarpent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 13:14:55 by acarpent          #+#    #+#             */
-/*   Updated: 2024/10/14 15:01:17 by acarpent         ###   ########.fr       */
+/*   Updated: 2024/10/16 14:40:02 by acarpent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,25 +23,6 @@ int	papa_proces(pid_t pid, int pipefd[2])
 		return (1);
 	close(pipefd[0]);
 	return (0);
-}
-
-bool	line_error(int l, char *line, char *limiter)
-{	
-	char	*lc;
-
-	lc = NULL;
-	if (!line)
-	{
-		lc = ft_itoa(l);
-		ft_putstr_fd("minishell: warning: ", 2);
-		ft_putstr_fd("here-document at line ", 2);
-		ft_putstr_fd(lc, 2);
-		ft_putstr_fd(" delimited by end-of-file (wanted '", 2);
-		ft_putstr_fd(limiter, 2);
-		ft_putstr_fd("')\n", 2);
-		return (true);
-	}
-	return (false);
 }
 
 void	read_until_limit(char *limiteur, int pipefd)
@@ -89,10 +70,7 @@ int	start_pipe(char *limiteur)
 		exit(EXIT_FAILURE);
 	}
 	else if (pid == 0)
-	{
-		close(pipefd[0]);
-		read_until_limit(limiteur, pipefd[1]);
-	}
+		is_working(pipefd, limiteur);
 	else
 	{
 		signal(SIGINT, sigint_here_doc);

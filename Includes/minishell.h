@@ -6,7 +6,7 @@
 /*   By: acarpent <acarpent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 15:22:22 by pgrellie          #+#    #+#             */
-/*   Updated: 2024/10/14 14:55:08 by acarpent         ###   ########.fr       */
+/*   Updated: 2024/10/16 15:59:20 by acarpent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,8 +145,6 @@ void			del_node(t_env *env, t_env *delete);
 
 //-------------------SIGNALS--------------//
 
-void			ft_signals(void);
-
 void			sigint_here_doc(int sig);
 void			ft_sigint_handler(int sig);
 void			ft_sigint_setup(void);
@@ -163,11 +161,11 @@ bool			line_error(int l, char *line, char *limiter);
 int				papa_proces(pid_t pid, int pipefd[2]);
 void			read_until_limit(char *limiteur, int pipefd);
 int				start_pipe(char *limiteur);
-void			close_pipe(int fd1, int fd2);
 void			arg_not_found(char *s);
 int				parse_here_doc(t_token *tok);
 void			here_doc_count(t_token *tok);
-void			exit_here_doc(t_ms *ms);
+void			syntax_error(t_token *tok);
+void			is_working(int pipefd, char *limiteur);
 
 // The program
 
